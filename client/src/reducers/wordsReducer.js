@@ -6,7 +6,7 @@ export default function wordsReducer(state = {
   };
   switch (action.type) {
 
-    case 'ADD_WORD':
+    case 'REPLACE_WORD':
       word.name = action.payload;
       return { ...state, words: [...state.words, word] };
 
