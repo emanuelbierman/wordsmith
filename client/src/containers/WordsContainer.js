@@ -11,7 +11,7 @@ class WordsContainer from Component {
   render() {
     return(
       <div>
-        <Words />
+        <Words words={this.props.words}/>
       </div>
     )
   }
