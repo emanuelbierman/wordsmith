@@ -26,5 +26,7 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-# Ignore updates to this file
+# Ignore updates to these files
 /lib/tasks/.DS_Store
+.env
+/node_modules
