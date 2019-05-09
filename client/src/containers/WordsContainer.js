@@ -4,10 +4,6 @@ import Words from '../components/Words';
 
 class WordsContainer from Component {
 
-  state = {
-    words: []
-  }
-
   render() {
     return(
       <div>
