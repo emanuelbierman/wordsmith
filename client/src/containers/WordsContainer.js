@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Words from '../components/Words';
 
-class WordsContainer from Component {
+class WordsContainer extends Component {
 
   render() {
     return(
@@ -20,7 +20,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    replaceWord: id => dispatch({type: 'REPLACE_WORD', payload: 'word' )})
+    replaceWord: id => dispatch({type: 'REPLACE_WORD', payload: 'word' })
   }
 }
 
