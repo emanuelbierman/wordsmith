@@ -32,7 +32,7 @@ class Word extends Component {
   }
 
   swapWord = event => {
-    this.props.replaceWord(this.props.word.id, this.props.word.originalText, this.props.word.text)
+    this.props.replaceWord(this.props.word.id, this.props.word.text)
   }
 
   componentDidMount() {
@@ -47,7 +47,7 @@ class Word extends Component {
     if (this.state.expandWord) {
       exampleString = <p>Choose the sense that best fits your intended use:</p>
       examples = this.state.examples.map(example => {
-        <p id={example.id} onClick={(event) => this.addSynonyms(example.synonyms, event)}>example.text</p>
+        return <p id={example.id} onClick={(event) => this.addSynonyms(example.synonyms, event)}>example.text</p>
       });
     } else {
       exampleString = '';

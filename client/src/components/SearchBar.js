@@ -19,16 +19,14 @@ class SearchBar extends Component {
   render() {
     return(<div>
         Start typing:
-        <input type="text" id="text" value={this.state.input} onChange={this.handleChange}>
-        <input type="submit" value="Reset">
+        <input type="text" id="text" value={this.state.input} onChange={this.handleChange}/>
+        <input type="submit" value="Reset"/>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return splicedWords: state.input.split(' ').filter(word => word.length > 2);
-}
+const mapStateToProps = state => ({ splicedWords: state.input.split(' ').filter(word => word.length > 2) })
 
 const mapDispatchToProps = dispatch => {
   return {

@@ -29,7 +29,7 @@ export default function wordsReducer(state = {
         return word.examples << example;
       })
 
-      return { ...state, words: ...state.words, word };
+      return { ...state, words: [...state.words, word] };
 
     default:
       return state;
