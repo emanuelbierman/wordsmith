@@ -2,16 +2,15 @@ import React, { Component } from 'react';
 
 class Word extends Component {
 
+  // const word = this.props.word;
+
   state = {
     text: this.props.word.text,
-    examples: {
-      synonyms: []
-    },
     expandWord: false
   }
 
   toggleExpansion = event => {
-    fetchWord(word);
+    fetchWord(this.props.word.text);
     {/*
       after the call to our external API, an action to update our store is dispatched
     */}
@@ -57,10 +56,12 @@ class Word extends Component {
 
     return(
       <div>
-        <h4 id={this.props.id} onClick={this.toggleExpansion}>{this.state.text}</h4>
+        <h4 id={this.props.word.id} onClick={this.toggleExpansion}>{this.state.text}</h4>
         {exampleString}
         {examples}
       </div>
     )
   }
 }
+
+export default Word;

@@ -1,13 +1,19 @@
 export default function wordsReducer(state = {
   words: []
 }, action) {
+  {/* word object: */}
   let word = {
-    name: ''
+    text: '',
+    examples: {
+      text: '',
+      synonyms: []
+    }
   };
+
   switch (action.type) {
 
     case 'REPLACE_WORD':
-      word.name = action.payload;
+      word.text = action.payload;
       return { ...state, words: [...state.words, word] };
 
     default:
