@@ -7,7 +7,7 @@ class WordsContainer extends Component {
   render() {
     return(
       <div>
-        <Words words={this.props.words}/>
+        <Words words={this.props.words}, replaceWord={this.props.replaceWord}/>
       </div>
     )
   }
@@ -20,7 +20,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    replaceWord: id => dispatch({type: 'REPLACE_WORD', payload: 'word' })
+    replaceWord: (originalText, newText) => dispatch({type: 'REPLACE_WORD', payload: {id: id, originalText: originalText, newText: newText }})
   }
 }
 

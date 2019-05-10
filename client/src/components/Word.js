@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import { fetchWord } from '../actions/wordsActions';
 
 class Word extends Component {
 
   // const word = this.props.word;
 
   state = {
-    text: this.props.word.text,
     expandWord: false
   }
 
@@ -26,13 +26,13 @@ class Word extends Component {
     each display should also have a handler to swap in the new word
     */}
     let synonymsString = `<ul>{synonyms.map(synonym => {
-      <li onClick={this.swapWord(synonym)}>synonym</li>
+      <li>synonym</li>
     })}</ul>`;
-    event.target.append(synonymsString);
+    event.target.append(synonyms);
   }
 
-  swapWord = (text, event) => {
-    this.setState({text: text, expandWord: false});
+  swapWord = event => {
+    this.props.replaceWord(this.props.word.id, this.props.word.originalText, this.props.word.text)
   }
 
   componentDidMount() {

@@ -11,6 +11,11 @@ class SearchBar extends Component {
     this.setState({input: event.target.value})
   }
 
+  componentDidMount() {
+    {/* Set an interval to wait for three seconds, so it doesnt search too soon */}
+    this.props.addWords(this.props.splicedWords);
+  }
+
   render() {
     return(<div>
         Start typing:
@@ -22,7 +27,7 @@ class SearchBar extends Component {
 }
 
 const mapStateToProps = state => {
-  return words: state.words.split(' ').filter(word => word.length > 2);
+  return splicedWords: state.input.split(' ').filter(word => word.length > 2);
 }
 
 const mapDispatchToProps = dispatch => {

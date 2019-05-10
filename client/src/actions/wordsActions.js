@@ -15,9 +15,9 @@ export const fetchWord = word => {
   return dispatch => {
     fetch(`{OxfordBaseUrl}/thesaurus/en/{word}`, data)
       .then(response => response.json())
-      .then(data => dispatch({
-        type: 'FETCH_WORD',
-        payload: data
+      .then(word => dispatch({
+        type: 'FETCH_WORD_DATA',
+        payload: word
       }))
       .catch(err => err)
   };
