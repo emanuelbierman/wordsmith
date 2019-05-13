@@ -8,7 +8,7 @@ export default function wordsReducer(state = {
   switch (action.type) {
 
     case 'ADD_WORDS':
-      return { ...state, words: action.payload.words };
+      return { ...state, words: action.words };
 
     case 'REPLACE_WORD':
       let newWord = state.words.find(word => word.id === action.payload.id);
