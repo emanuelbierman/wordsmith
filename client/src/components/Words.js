@@ -4,7 +4,10 @@ import Word from './Word';
 class Words extends Component {
   render() {
     return(
-      this.props.words.map((word) => <Word word={word} key={word.id}/>)
+      <div>
+        Then click on a word to expand it:<br></br>
+        {this.props.words.map(word => <Word word={word} key={word.id}/>)}
+      </div>
     )
   }
 }
