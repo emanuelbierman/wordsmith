@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 class SearchBar extends Component {
 
   state = {
-    input: 'example'
+    input: ''
   }
 
   handleChange = event => {
@@ -17,12 +17,12 @@ class SearchBar extends Component {
   }
 
   componentDidMount() {
-    return this.interval = setInterval(this.addWordsFn, 3000);
+    return this.interval = setInterval(this.addWordsFn, 2000);
     {/* Bind the addWords function so it doesnt lose its context within the setInterval function */}
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);
+    {/* clearInterval(this.interval); */}
   }
 
   render() {
