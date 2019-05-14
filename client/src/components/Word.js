@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { fetchWord } from '../actions/wordsActions';
 
 class Word extends Component {
@@ -10,7 +11,7 @@ class Word extends Component {
   }
 
   toggleExpansion = event => {
-    fetchWord(this.props.word);
+    this.props.fetchWord(this.props.word);
     {/*
       after the call to our external API, an action to update our store is dispatched
     */}
@@ -64,4 +65,4 @@ class Word extends Component {
   }
 }
 
-export default Word;
+export default connect(null, { fetchWord })(Word);
