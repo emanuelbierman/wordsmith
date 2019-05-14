@@ -56,7 +56,7 @@ class Word extends Component {
 
     return(
       <div>
-        <h4 id={this.props.word.id} onClick={this.toggleExpansion}>{this.state.text}</h4>
+        <h4 id={this.props.word.id} onClick={this.toggleExpansion}>{this.props.word.text}</h4>
         {exampleString}
         {examples}
       </div>

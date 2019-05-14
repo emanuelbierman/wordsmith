@@ -17,7 +17,7 @@ export const fetchWord = word => {
       .then(response => response.json())
       .then(word => dispatch({
         type: 'FETCH_WORD_DATA',
-        payload: word
+        word: word
       }))
       .catch(err => err)
   };
