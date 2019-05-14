@@ -10,7 +10,7 @@ class Word extends Component {
   }
 
   toggleExpansion = event => {
-    fetchWord(this.props.word.text);
+    fetchWord(this.props.word);
     {/*
       after the call to our external API, an action to update our store is dispatched
     */}
@@ -46,7 +46,7 @@ class Word extends Component {
 
     if (this.state.expandWord) {
       exampleString = <p>Choose the sense that best fits your intended use:</p>
-      examples = this.state.examples.map(example => {
+      examples = this.props.word.examples.map(example => {
         return <p id={example.id} onClick={(event) => this.addSynonyms(example.synonyms, event)}>example.text</p>
       });
     } else {

@@ -25,19 +25,13 @@ export default function wordsReducer(state = {
       return { ...state, words: state.words };
 
     case 'FETCH_WORD_DATA':
-      let word = {
-        id: cuidFn(),
-        text: action.word.text,
-        originalText: action.word.text,
-        examples: []
-      };
+      let response = action.payload.response;
 
-      {/* each example should be formatted with a text property and synonyms array */}
-      action.word.examples.map(example => {
-        return word.examples << example;
-      })
+      let word = state.words.find(word => word.id === action.payload.id);
 
-      return { ...state, words: [...state.words, word] };
+      {/* TODO: map over each example, format them into an object with a text property and synonyms array, and shove it into the current word object's examples array */}
+
+      return { ...state, words: state.words };
 
     default:
       return state;
