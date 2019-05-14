@@ -17,7 +17,7 @@ class SearchBar extends Component {
   }
 
   componentDidMount() {
-    return this.interval = setInterval(this.addWordsFn, 2000);
+    {/* return this.interval = setInterval(this.addWordsFn, 2000); */}
     {/* Bind the addWords function so it doesnt lose its context within the setInterval function */}
   }
 
@@ -29,7 +29,7 @@ class SearchBar extends Component {
     return(<div>
         Start typing into the search bar:
         <input type="text" id="text" value={this.state.input} onChange={this.handleChange}/>
-        <input type="submit" value="Reset"/>
+        <input type="submit" onClick={this.addWordsFn} value="Submit"/>
       </div>
     );
   }
