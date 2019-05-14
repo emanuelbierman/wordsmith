@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <Router>
         <Route path="/" component={SearchBar} />
-        <Route path="/forge/" component={WordsContainer} />
+        <Route path="/" component={WordsContainer} />
       </Router>
     );
   }
