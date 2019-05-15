@@ -13,7 +13,6 @@ export default function wordsReducer(state = {
           id: cuidFn(),
           text: word,
           originalText: word,
-          labels: [],
           examples: []
         };
       })
@@ -30,15 +29,37 @@ export default function wordsReducer(state = {
       let word = state.words.find(word => word.id === action.payload.id);
       // let entries = response.filter(data => !Object.getOwnPropertyNames(data).includes('hom'));
 
-      // Generate a unique list of labels for the word - noun, adjective, etc
-      word.labels = Array.from(new Set(response.map(data => data.fl)));
-      // find the first occurrence of each of the labels for the word
-      word.labels.forEach(label => {
-        let example = response.find(data => (data.fl === label));
-        return word.examples.push(example);
+      // filter out the entry choices that don't match the original text
+      response = response.filter(res => res.hwi.hw === word.text);
+      // push each matching entry into the word object's examples array
+      response.map(entry => word.examples.push(entry));
+
+      // Generate a unique list of uses for the word - noun, adjective, etc
+      // let uses = Array.from(new Set(response.map(data => data.fl)));
+      // uses.forEach(use => {
+        // find the first entry that matches the word's use
+        // let example = response.find(data => (data.fl === use));
+        // this entry gets
+        // return word.examples.push(example);
+      // })
+
+      word.examples.map(entry => {
+        // filter out senses that are parenthesized
+        // let senses = entry.def[0].sseq.filter(s => s[0][0] !== "pseq");
+        // filter out senses that don't have a "sense" key at the next top level
+        // senses = senses.filter(s => s[0][0] === "sense");
+        // senses = senses.map(sense => sense[0][1].dt[0][1] );
+        // {
+        //   text: '',
+        //   synonyms: []
+        // }
+        return {
+          partOfSpeech: entry.fl,
+          senses: entry.def[0].sseq
+        }
       })
       {/* TODO: map over each example, format them into an object with a text property and synonyms array, and shove it into the current word object's examples array */}
-
+      debugger;
       return { ...state, words: state.words };
 
     default:

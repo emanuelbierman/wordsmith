@@ -1,9 +1,9 @@
 const LocalBaseUrl = 'http://localhost:3001/api/v1';
 
-const MerriamWebsterBaseUrl = 'https://dictionaryapi.com/api/v3/references/collegiate/json/';
+const MerriamWebsterBaseUrl = 'https://dictionaryapi.com/api/v3/references/thesaurus/json/';
 
 export const fetchWord = word => {
-  let url = `${MerriamWebsterBaseUrl}${word.text}?key=13fc9042-8226-4650-b526-bbbb2386848e`;
+  let url = `${MerriamWebsterBaseUrl}${word.text}?key=6ee4458e-aa4b-4df1-b3fb-ee242052a997`;
   return dispatch => {
     fetch(url, { method: 'GET' })
     .then(response => response.json())
