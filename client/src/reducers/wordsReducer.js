@@ -13,6 +13,7 @@ export default function wordsReducer(state = {
           id: cuidFn(),
           text: word,
           originalText: word,
+          labels: [],
           examples: []
         };
       })
@@ -26,9 +27,16 @@ export default function wordsReducer(state = {
 
     case 'FETCH_WORD_DATA':
       let response = action.payload.response;
-
       let word = state.words.find(word => word.id === action.payload.id);
+      // let entries = response.filter(data => !Object.getOwnPropertyNames(data).includes('hom'));
 
+      // Generate a unique list of labels for the word - noun, adjective, etc
+      word.labels = Array.from(new Set(response.map(data => data.fl)));
+      // find the first occurrence of each of the labels for the word
+      word.labels.forEach(label => {
+        let example = response.find(data => (data.fl === label));
+        return word.examples.push(example);
+      })
       {/* TODO: map over each example, format them into an object with a text property and synonyms array, and shove it into the current word object's examples array */}
 
       return { ...state, words: state.words };
