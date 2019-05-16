@@ -19,47 +19,28 @@ export default function wordsReducer(state = {
       return { ...state, words: newWords };
 
     case 'REPLACE_WORD':
-      let newWord = state.words.find(word => word.id === action.payload.id);
-      newWord.text = action.payload.newText;
-      {/* find the right word in the words array based on its id and replace it with the new text */}
+      // find the right word in the words array based on its id and replace it with the new text
+      let word = state.words.find(word => word.id === action.payload.id);
+      word.text = action.payload.newText;
       return { ...state, words: state.words };
 
     case 'FETCH_WORD_DATA':
       let response = action.payload.response;
+      // find relevant word
       let word = state.words.find(word => word.id === action.payload.id);
-      // let entries = response.filter(data => !Object.getOwnPropertyNames(data).includes('hom'));
-
       // filter out the entry choices that don't match the original text
       response = response.filter(res => res.hwi.hw === word.text);
       // push each matching entry into the word object's examples array
       response.map(entry => word.examples.push(entry));
-
-      // Generate a unique list of uses for the word - noun, adjective, etc
-      // let uses = Array.from(new Set(response.map(data => data.fl)));
-      // uses.forEach(use => {
-        // find the first entry that matches the word's use
-        // let example = response.find(data => (data.fl === use));
-        // this entry gets
-        // return word.examples.push(example);
-      // })
-
-      word.examples.map(entry => {
-        // filter out senses that are parenthesized
-        // let senses = entry.def[0].sseq.filter(s => s[0][0] !== "pseq");
-        // filter out senses that don't have a "sense" key at the next top level
-        // senses = senses.filter(s => s[0][0] === "sense");
-        // senses = senses.map(sense => sense[0][1].dt[0][1] );
-        // {
-        //   text: '',
-        //   synonyms: []
-        // }
-        return {
-          partOfSpeech: entry.fl,
-          senses: entry.def[0].sseq
-        }
-      })
-      {/* TODO: map over each example, format them into an object with a text property and synonyms array, and shove it into the current word object's examples array */}
-      debugger;
+      // map over each example, format them into an object with extracted data stored as keys, and store it into the current word object's examples array
+      word.examples = word.examples.map(entry => {
+        let example = {
+          usage: entry.fl,
+          sense: entry.def[0].sseq[0][0][1].dt[0][1],
+          synonyms: entry.def[0].sseq[0][0][1].syn_list[0].map(syn => syn.wd)
+        };
+        return example;
+      });
       return { ...state, words: state.words };
 
     default:
