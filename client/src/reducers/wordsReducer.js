@@ -13,6 +13,7 @@ export default function wordsReducer(state = {
           id: cuidFn(),
           text: word,
           originalText: word,
+          isFetched: false,
           examples: []
         };
       })
@@ -40,7 +41,15 @@ export default function wordsReducer(state = {
           synonyms: entry.def[0].sseq[0][0][1].syn_list[0].map(syn => syn.wd)
         };
       });
+      if (word.examples.length > 0) {
+        word.isFetched = true;
+      } else {
+        word.isFetched = 'either there were no entries matching your word, or something went wrong - try again!';
+      }
       return { ...state, words: state.words };
+
+    case 'FETCHED_WORD':
+      return { words: state.words };
 
     default:
       return state;
