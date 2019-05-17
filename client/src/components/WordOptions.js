@@ -10,7 +10,7 @@ class WordOptions extends Component {
         <p>
           {this.props.example.usage}:      {this.props.example.sense}
         </p>
-        {this.props.example.synonyms.map(synonym => synonym}
+        {this.props.example.synonyms.map(synonym => synonym)}
       </div>
     );
   };
