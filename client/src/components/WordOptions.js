@@ -5,6 +5,9 @@ class WordOptions extends Component {
   // const example = this.props.example;
 
   render() {
+    if (this.props.loading ) {
+      return <div>Loading...</div>
+    }
     return(
       <div>
         <p>

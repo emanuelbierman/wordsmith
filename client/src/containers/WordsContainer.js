@@ -8,13 +8,13 @@ class WordsContainer extends Component {
     return(
       <div>
         <br></br>Click on a word to expand it:<br></br>
-        {this.props.words.map(word => <Word word={word} key={word.id} replaceWord={this.props.replaceWord}/>)}
+        {this.props.words.map(word => <Word word={word} key={word.id} replaceWord={this.props.replaceWord} loading={this.props.loading}/>)}
       </div>
     )
   };
 };
 
-const mapStateToProps = state => ({ words: state.words })
+const mapStateToProps = state => ({ words: state.words, loading: state.loading })
 
 const mapDispatchToProps = dispatch => {
   return {
