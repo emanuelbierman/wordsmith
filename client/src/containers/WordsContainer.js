@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Words from '../components/Words';
+import Word from '../components/Word';
 
 class WordsContainer extends Component {
 
   render() {
     return(
       <div>
-        <Words words={this.props.words} replaceWord={this.props.replaceWord}/>
+        <br></br>Click on a word to expand it:<br></br>
+        {this.props.words.map(word => <Word word={word} key={word.id} replaceWord={this.props.replaceWord}/>)}
       </div>
     )
   };
 };
-
 
 const mapStateToProps = state => ({ words: state.words })
 
