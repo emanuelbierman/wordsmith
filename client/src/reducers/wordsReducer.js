@@ -2,7 +2,8 @@ import cuid from 'cuid';
 export const cuidFn = cuid;
 
 export default function wordsReducer(state = {
-  words: []
+  words: [],
+  loading: false
 }, action) {
   let word, words;
   switch (action.type) {
@@ -17,7 +18,12 @@ export default function wordsReducer(state = {
           examples: []
         };
       })
+      console.log(state);
       return { ...state, words: words };
+
+    case 'BEGIN_FETCH_WORD_DATA':
+      console.log('beginning fetch');
+      return { ...state, loading: true };
 
     case 'REPLACE_WORD':
       // find the right word in the words array based on its id and replace it with the new text
@@ -46,10 +52,12 @@ export default function wordsReducer(state = {
       } else {
         word.isFetched = 'either there were no entries matching your word, or something went wrong - try again!';
       }
+      console.log(state);
       return { ...state, words: state.words };
 
-    case 'FETCHED_WORD':
-      return { words: state.words };
+    case 'END_FETCH_WORD_DATA':
+      console.log('successful fetch');
+      return { words: state.words, loading: false };
 
     default:
       return state;
