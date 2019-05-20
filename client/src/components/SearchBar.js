@@ -13,7 +13,7 @@ class SearchBar extends Component {
 
   addWordsFn = () => {
     // words should be lowercase, stripped of whitespace, and longer than 2 characters
-    let words = this.state.input.toLowerCase().concat(' ').split(' ').filter(word => word.length > 2);
+    let words = this.state.input;
     this.props.addWords(words);
   }
 
