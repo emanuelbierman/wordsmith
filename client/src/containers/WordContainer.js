@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchWord } from '../actions/wordsActions';
+import { shouldFetchWord } from '../actions/wordsActions';
 import WordOption from '../components/WordOption';
 
 class WordContainer extends Component {
 
   // const word = this.props.word;
 
+  state = {
+    text: this.props.word.text,
+    expand: false
+  }
+
   beginFetch = () => {
-    this.props.fetchWord(this.props.word);
+    this.props.shouldFetchWord(this.props.word);
+  }
+
+  swapWord = () => {
+
   }
 
   render() {
@@ -18,9 +27,10 @@ class WordContainer extends Component {
     let expandedMessage, options;
     if (!this.props.loading && this.props.word.isFetched) {
       expandedMessage = 'Click on each usage:sense pair to find one that fits your sentence:'
-      options = this.props.word.examples.map(example => {
-        return <WordOption key={example.id} example={example} isFetched={this.props.word.isFetched}
-        fetchWord={this.props.fetchWord} replaceWord={this.props.replaceWord} expandWord={this.props.expandWord} wordId={this.props.word.id}/>
+      options = this.props.word.options.map(option => {
+        return <WordOption key={option.id} option={option} isFetched={this.props.word.isFetched}
+        fetchWord={this.props.fetchWord} replaceWord={this.props.replaceWord}
+        swapWord={this.swapWord} expandWord={this.props.expandWord} wordId={this.props.word.id}/>
       })
     } else {
       expandedMessage = '';
@@ -28,7 +38,7 @@ class WordContainer extends Component {
     }
     return(
       <div>
-        <h3 onClick={this.beginFetch}>{this.props.word.text}</h3>
+        <h3 onClick={this.beginFetch}>{this.state.text}</h3>
         {expandedMessage}
         {options}
       </div>
@@ -36,4 +46,4 @@ class WordContainer extends Component {
   }
 }
 
-export default connect(null, { fetchWord })(WordContainer);
+export default connect(null, { shouldFetchWord })(WordContainer);
