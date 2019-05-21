@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import Synonym from './Synonym';
 
 class WordOption extends Component {
 
-  // const example = this.props.example;
+  // const option = this.props.option;
 
   state = {
     expand: true
@@ -27,8 +28,8 @@ class WordOption extends Component {
   render() {
     let synonyms;
     if (this.props.isFetched) {
-      synonyms = this.props.example.synonyms.map((synonym, index) => {
-        return <li>{synonym}</li>
+      synonyms = this.props.option.synonyms.map((synonym, index) => {
+        return <Synonym synonym={synonym} swapWord={this.props.swapWord}/>
       });
     } else {
       synonyms = '';
@@ -36,7 +37,7 @@ class WordOption extends Component {
     return(
       <div>
         <p onClick={this.toggleExpand}>
-          {this.props.example.usage}:      {this.props.example.sense}
+          {this.props.option.usage}:      {this.props.option.sense}
         </p>
         <ul>{synonyms}</ul>
       </div>
