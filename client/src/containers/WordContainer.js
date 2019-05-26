@@ -16,8 +16,8 @@ class WordContainer extends Component {
     this.props.shouldFetchWord(this.props.word);
   }
 
-  swapWord = () => {
-
+  swapText = synonym => {
+    this.setState({ text: synonym })
   }
 
   render() {
@@ -30,7 +30,7 @@ class WordContainer extends Component {
       options = this.props.word.options.map(option => {
         return <WordOption key={option.id} option={option} isFetched={this.props.word.isFetched}
         fetchWord={this.props.fetchWord} replaceWord={this.props.replaceWord}
-        swapWord={this.swapWord} expandWord={this.props.expandWord} wordId={this.props.word.id}/>
+        swapText={this.swapText} expandWord={this.props.expandWord} wordId={this.props.word.id}/>
       })
     } else {
       expandedMessage = '';

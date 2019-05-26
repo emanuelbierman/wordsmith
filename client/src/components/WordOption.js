@@ -29,7 +29,7 @@ class WordOption extends Component {
     let synonyms;
     if (this.props.isFetched) {
       synonyms = this.props.option.synonyms.map((synonym, index) => {
-        return <Synonym synonym={synonym} swapWord={this.props.swapWord}/>
+        return <Synonym synonym={synonym} swapText={this.props.swapText}/>
       });
     } else {
       synonyms = '';
