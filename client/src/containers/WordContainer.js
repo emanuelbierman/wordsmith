@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { shouldFetchWord } from '../actions/wordsActions';
+import { fetchWord, postWord } from '../actions/wordsActions';
 import WordOption from '../components/WordOption';
 
 class WordContainer extends Component {
@@ -8,16 +8,22 @@ class WordContainer extends Component {
   // const word = this.props.word;
 
   state = {
-    text: this.props.word.text,
-    expand: false
+    text: this.props.word.text
   }
 
   beginFetch = () => {
-    this.props.shouldFetchWord(this.props.word);
+    this.props.fetchWord(this.props.word);
   }
 
   swapText = synonym => {
     this.setState({ text: synonym })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // if word has loaded, push to backend API
+    if (this.props.word.isFetched) {
+      this.props.postWord(this.props.word);
+    }
   }
 
   render() {
@@ -46,4 +52,4 @@ class WordContainer extends Component {
   }
 }
 
-export default connect(null, { shouldFetchWord })(WordContainer);
+export default connect(null, { fetchWord, postWord })(WordContainer);
