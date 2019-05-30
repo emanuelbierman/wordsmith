@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import Synonym from './Synonym';
+import { Row, Card } from 'reactstrap';
 
 class WordOption extends Component {
 
   // const option = this.props.option;
 
   state = {
-    expand: true
+    expand: false
   }
 
   toggleExpand = () => {
-    if (this.props.expanded === false) {
-      this.props.expandWord(this.props.wordId);
-    }
+    this.setState(state => ({
+      expand: !state.expand
+    }));
   }
 
   swap = synonym => {
@@ -27,7 +28,7 @@ class WordOption extends Component {
 
   render() {
     let synonyms;
-    if (this.props.isFetched) {
+    if (this.state.expand && this.props.option.synonyms.length > 0) {
       synonyms = this.props.option.synonyms.map((synonym, index) => {
         return <Synonym synonym={synonym} swapText={this.props.swapText}/>
       });
@@ -35,12 +36,12 @@ class WordOption extends Component {
       synonyms = '';
     }
     return(
-      <div>
+      <Card body outline color="info">
         <p onClick={this.toggleExpand}>
           {this.props.option.usage}:      {this.props.option.sense}
         </p>
         <ul>{synonyms}</ul>
-      </div>
+      </Card>
     );
   };
 };
