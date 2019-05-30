@@ -13,7 +13,6 @@ class SearchBar extends Component {
   }
 
   addWordsFn = () => {
-    // words should be lowercase, stripped of whitespace, and longer than 2 characters
     let words = this.state.input;
     this.props.addWords(words);
   }
@@ -32,7 +31,7 @@ class SearchBar extends Component {
       <Container className="text-info">
         <h4>Wordsmith</h4>
         <Container>
-          <Input type="text" value={this.state.input} onChange={this.handleChange} placeholder="start typing or paste any text:" /><Button outline color="info" onClick={this.addWordsFn}>Submit</Button>
+          <Input type="text" value={this.state.input} onChange={this.handleChange} placeholder="Start typing or paste any text:" /><Button outline color="info" onClick={this.addWordsFn}>Submit</Button>
         </Container>
       </Container>
     );
