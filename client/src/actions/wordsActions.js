@@ -9,11 +9,11 @@ export const fetchWord = word => {
   // call the local api first; if it returns nothing, call external api, and if successful, post to local api
   return dispatch => {
     dispatch({type: 'BEGIN_FETCH_WORD'});
-    fetch(api_url, { method: 'GET', headers: {'Content-Type': 'application/json'} })
+    fetch(api_url, { method: 'GET', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'} })
     .then(response => response.json())
     .then(response => {
-      // if the response returns a word:
-      if (response !== null) {
+      // if the response returns a word, add the info to state:
+      if (Object.entries(response).length > 0) {
         dispatch({
             type: 'UPDATE_API_WORD',
             payload: {
@@ -24,6 +24,7 @@ export const fetchWord = word => {
           );
         dispatch({type: 'END_FETCH_WORD'});
       } else {
+        // otherwise, fetch from external api:
         fetch(merriam_url, { method: 'GET' })
         .then(response => response.json())
         .then(response => {
@@ -38,8 +39,9 @@ export const fetchWord = word => {
           dispatch({type: 'END_FETCH_WORD'});
           }
         )
+      .catch(err => err)
       }
-    })
+    }).catch(err => err)
   }
 }
 
@@ -47,11 +49,24 @@ export const postWord = word => {
   let api_url = `${LocalBaseUrl}/${word.text}`;
   // post word data to rails API
   return dispatch => {
-    fetch(api_url, { method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: word })
+    fetch(api_url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        word: word
+      })
+    })
     .then(response => response.json())
     .then(response => {
-      // is this action even necessary? what should a successful/unsuccessful POST request return?
-      dispatch({ type: 'POSTED_WORD', payload: {id: word.id, response: response}})
+      if (Object.entries(response).length > 0) {
+        dispatch({ type: 'POST_FAILED', payload: {id: word.id, response: response}})
+      } else {
+        dispatch({ type: 'POSTED_WORD', payload: {id: word.id, response: response}})
+      }
     })
+    .catch(err => err);
   }
 }
