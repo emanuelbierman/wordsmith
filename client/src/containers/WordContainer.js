@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchWord, postWord } from '../actions/wordsActions';
 import WordOption from '../components/WordOption';
+import { Card } from 'reactstrap';
 
 class WordContainer extends Component {
 
@@ -30,24 +31,23 @@ class WordContainer extends Component {
     if (this.props.loading) {
       return <div>Loading...</div>
     }
-    let expandedMessage, options;
-    if (!this.props.loading && this.props.word.isFetched) {
-      expandedMessage = 'Click on each usage:sense pair to find one that fits your sentence:'
+    let options;
+    if (!this.props.loading && this.props.word.isFetched && this.props.word.options.length > 0) {
       options = this.props.word.options.map(option => {
         return <WordOption key={option.id} option={option} isFetched={this.props.word.isFetched}
         fetchWord={this.props.fetchWord} replaceWord={this.props.replaceWord}
         swapText={this.swapText} expandWord={this.props.expandWord} wordId={this.props.word.id}/>
-      })
+      });
+    } else if (this.props.word.isFetched && this.props.word.options.length < 0) {
+      options = 'There has been an error loading the information you requested. Try refreshing again or try another word!';
     } else {
-      expandedMessage = '';
-      options = '';
+      options = null;
     }
     return(
-      <div>
+      <Card body outline color="info">
         <h3 onClick={this.beginFetch}>{this.state.text}</h3>
-        {expandedMessage}
         {options}
-      </div>
+      </Card>
     )
   }
 }
