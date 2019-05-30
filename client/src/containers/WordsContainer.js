@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import WordContainer from './WordContainer';
+import { Container, Row, Col } from 'reactstrap';
 
 class WordsContainer extends Component {
 
   render() {
     return(
-      <div>
-        <br></br>Click on a word to expand it:<br></br>
-        {this.props.words.map(word => <WordContainer word={word} key={word.id} replaceWord={this.props.replaceWord} expandWord={this.props.expandWord} loading={this.props.loading}/>)}
-      </div>
+      <Container className="text-info">
+        <br></br>
+        <p>choose a word to expand it => choose the usage:sense pair that fits your meaning => begin forging!</p>
+        <br></br>
+        <Row xs="auto">
+          {this.props.words.map((word, index) => <Col key={index} xs="auto"><WordContainer word={word} key={word.id} replaceWord={this.props.replaceWord} expandWord={this.props.expandWord} loading={this.props.loading}/></Col>)}
+        </Row>
+      </Container>
     )
   };
 };
