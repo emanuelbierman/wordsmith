@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Button, Input } from 'reactstrap';
+import {
+  Container,
+  Button,
+  Input,
+  InputGroup,
+  InputGroupAddon
+} from 'reactstrap';
 
 class SearchBar extends Component {
 
@@ -29,9 +35,14 @@ class SearchBar extends Component {
   render() {
     return(
       <Container className="text-info">
-        <h4>Wordsmith</h4>
+        <h1>Wordsmith</h1>
         <Container>
-          <Input type="text" value={this.state.input} onChange={this.handleChange} placeholder="Start typing or paste any text:" /><Button outline color="info" onClick={this.addWordsFn}>Submit</Button>
+          <InputGroup>
+            <Input type="text" value={this.state.input} onChange={this.handleChange} placeholder="Start typing or paste any text:" />
+            <InputGroupAddon addonType="append">
+              <Button color="info" onClick={this.addWordsFn}>Submit</Button>
+            </InputGroupAddon>
+          </InputGroup>
         </Container>
       </Container>
     );
