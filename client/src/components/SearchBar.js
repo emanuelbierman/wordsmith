@@ -34,8 +34,6 @@ class SearchBar extends Component {
 
   render() {
     return(
-      <Container className="text-info">
-        <h1>Wordsmith</h1>
         <Container>
           <InputGroup>
             <Input type="text" value={this.state.input} onChange={this.handleChange} placeholder="Start typing or paste any text:" />
@@ -44,7 +42,6 @@ class SearchBar extends Component {
             </InputGroupAddon>
           </InputGroup>
         </Container>
-      </Container>
     );
   }
 }
