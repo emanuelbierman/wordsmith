@@ -12,6 +12,7 @@ export default function wordsReducer(state = {
     case 'ADD_WORDS':
       // split into array and eliminate trailing white space if present
       words = action.words.split(' ').filter(w => w.length > 0);
+      // consider switching every instance of 'a' or 'an' to a combined 'a/an'
       words = words.map((text, index) => {
         return {
           id: cuidFn(),
@@ -86,7 +87,7 @@ export default function wordsReducer(state = {
       // does the selectedWord match the newly created word?
       if (selectedWord.text === action.payload.response.text && selectedWord.options.length === action.payload.response.options.length) {
         selectedWord.posted = true;
-        console.log(`${selectedWord.text} has been successfully saved to backend API`)
+        console.log(`${selectedWord.text} has been saved to backend API or already exists there`)
       }
       return { ...state, words: [...state.words] };
 
@@ -95,7 +96,7 @@ export default function wordsReducer(state = {
       // does the selectedWord match the newly created word?
       if (selectedWord.text === action.payload.response.text && selectedWord.options.length === action.payload.response.options.length) {
         selectedWord.posted = true;
-        console.log(`${selectedWord.text} already exists`)
+        console.log(`${selectedWord.text} was not saved to the backend API`)
       }
       return { ...state, words: [...state.words] };
 

@@ -62,9 +62,9 @@ export const postWord = word => {
     .then(response => response.json())
     .then(response => {
       if (Object.entries(response).length > 0) {
-        dispatch({ type: 'POST_FAILED', payload: {id: word.id, response: response}})
-      } else {
         dispatch({ type: 'POSTED_WORD', payload: {id: word.id, response: response}})
+      } else {
+        dispatch({ type: 'POST_FAILED', payload: {id: word.id, response: response}})
       }
     })
     .catch(err => err);
