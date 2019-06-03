@@ -4,9 +4,8 @@ export const cuidFn = cuid;
 export default function wordsReducer(state = {
   words: [],
   loading: false
-  // create empty loading array, and inside ADD_WORDS action, grab the index of the word and create an object inside the loading array, with a key of index and a value of false. Then inside BEGIN and END actions, find the object's index and set the value of the corresponding key to true
 }, action) {
-  let word, words, selectedWord, response;
+  let word, words, selectedWord, response, example;
   switch (action.type) {
 
     case 'ADD_WORDS':
@@ -18,7 +17,6 @@ export default function wordsReducer(state = {
           id: cuidFn(),
           index: index,
           text: text,
-          originalText: text,
           isFetched: false,
           posted: false,
           options: []
@@ -31,14 +29,6 @@ export default function wordsReducer(state = {
       console.log('beginning fetch, setting loading to true');
       console.log(state)
       return { ...state, loading: true };
-
-    case 'REPLACE_WORD':
-      // find the right word in the words array based on its id and replace it with the new text
-      selectedWord = state.words.filter(word => word.id === action.payload.id)[0];
-      selectedWord.text = action.payload.newText;
-      console.log(`replaced word from ${selectedWord.originalText} to  ${selectedWord.text}`)
-      // add selectedWord back into state
-      return { ...state, words: [...state.words] };
 
     case 'UPDATE_EXTERNAL_WORD':
       response = action.payload.response;
@@ -100,16 +90,19 @@ export default function wordsReducer(state = {
       }
       return { ...state, words: [...state.words] };
 
-    // case 'EXPAND_WORD':
-    //   word = state.words.find(word => word.id === action.payload.id);
-    //   word.expanded = true;
-    //   console.log('word should be expanded:  ' + word.expanded);
-    //   return { ...state, words: state.words };
-
-    // case 'ABORT_FETCH_WORD':
-    //   selectedWord = state.words.filter(word => word.id === action.payload.id)[0];
-    //   selectedWord.message = 'This word is too short to look up.'
-    //   return { ...state, words: [...state.words] }
+    case 'ADD_EXAMPLE':
+      example = 'Experiment and swap until your heart is full'
+      words = example.split(' ').map((text, index) => {
+        return {
+          id: cuidFn(),
+          index: index,
+          text: text,
+          isFetched: false,
+          posted: false,
+          options: []
+        };
+      })
+      return { ...state, words: [...words] };
 
     default:
       return state;
