@@ -10,6 +10,7 @@ class Api::V1::WordsController < ApplicationController
       word = Word.all.find_by(text: params[:text])
       render json: word.to_json(include: :options), status: 200
     else
+      # Word not found
       render json: {}, status: 404
     end
   end
@@ -17,21 +18,17 @@ class Api::V1::WordsController < ApplicationController
   def create
     word = Word.find_or_create_by(text: params[:text])
     if word.options.length === 0
-      # access the payload through params
-      # create Option objects
       params[:word][:options].each do |option|
         Option.create! word_id: word.id, usage: option[:usage], sense: option[:sense], synonyms: option[:synonyms]
       end
-      if word.options.length > 0
-        # the new Word and Options were created
-        render json: word.to_json(include: :options), status: 201
-      else
-        # the Options creation failed
-        render json: {}, status: 404
-      end
+      # Options have been created and the Word has been created/updated as necessary
+      render json: word.to_json(include: :options), status: 202
+    elsif word.options.length > 0
+      # the Word and Options already exist
+      render json: word.to_json(include: :options), status: 201
     else
-      # the word already exists
-      render json: word.to_json(include: :options), status: 200
+      # the Options creation failed
+      render json: {}, status: 404
     end
   end
 
