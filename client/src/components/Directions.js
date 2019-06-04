@@ -12,7 +12,9 @@ class Directions extends Component {
         <Row>
           <h5><Badge color="info">3</Badge> choose the usage:sense pair that fits your meaning => <Badge color="info">4</Badge> click on synonyms to swap and experiment!</h5>
         </Row>
-        <br></br>
+        <Row>
+          <p>Note: very small words, plural forms and other variants may not have an entry in the Thesaurus</p>
+        </Row>
       </Container>
     )
   }
