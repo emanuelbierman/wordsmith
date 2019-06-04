@@ -22,3 +22,11 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+Screenshots:
+
+![screenshot_1](public/images/screenshot_1)
+
+![screenshot_2](public/images/screenshot_2)
+
+![screenshot_3](public/images/screenshot_3)
