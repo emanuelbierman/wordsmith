@@ -28,5 +28,6 @@
 
 # Ignore updates to these miscellaneous files:
 /lib/tasks/.DS_Store
+/public/.DS_Store
 .env
 /node_modules
