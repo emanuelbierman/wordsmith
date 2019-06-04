@@ -18,7 +18,7 @@ class WordContainer extends Component {
       expandOptions: !state.expandOptions
     }));
     // only fetch if it hasn't been fetched yet
-    if (!this.props.word.isFetched) {
+    if (!this.props.word.fetched) {
       this.props.fetchWord(this.props.word);
     }
   }
@@ -28,7 +28,7 @@ class WordContainer extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.word.isFetched && !this.props.word.posted) {
+    if (this.props.word.fetched && !this.props.word.posted) {
       // if word has loaded and hasn't already been posted, post to backend API
       this.props.postWord(this.props.word);
     }
@@ -40,13 +40,12 @@ class WordContainer extends Component {
       options = null;
     } else if (this.state.expandOptions && this.props.loading) {
       options = <div>Loading...</div>;
-    } else if (this.state.expandOptions && !this.props.word.isFetched) {
+    } else if (this.state.expandOptions && !this.props.word.fetched) {
       options = <div>There has been an error loading the information you requested. Try clicking again, try another word, or refresh the page...</div>;
-    } else if (this.state.expandOptions && this.props.word.isFetched) {
+    } else if (this.state.expandOptions && this.props.word.fetched) {
       options = this.props.word.options.map(option => {
-        return <WordOption key={option.id} option={option} isFetched={this.props.word.isFetched}
-        fetchWord={this.props.fetchWord} replaceWord={this.props.replaceWord}
-        swapText={this.swapText} expandWord={this.props.expandWord} wordId={this.props.word.id}/>
+        return <WordOption key={option.id} option={option} swapText={this.swapText}
+        wordId={this.props.word.id}/>
       });
     }
     return(

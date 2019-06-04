@@ -5,7 +5,7 @@ export default function wordsReducer(state = {
   words: [],
   loading: false
 }, action) {
-  let word, words, selectedWord, response, example;
+  let words, selectedWord, response, example;
   switch (action.type) {
 
     case 'ADD_WORDS':
@@ -17,7 +17,7 @@ export default function wordsReducer(state = {
           id: cuidFn(),
           index: index,
           text: text,
-          isFetched: false,
+          fetched: false,
           posted: false,
           options: []
         };
@@ -27,7 +27,6 @@ export default function wordsReducer(state = {
 
     case 'BEGIN_FETCH_WORD':
       console.log('beginning fetch, setting loading to true');
-      console.log(state)
       return { ...state, loading: true };
 
     case 'UPDATE_EXTERNAL_WORD':
@@ -47,7 +46,9 @@ export default function wordsReducer(state = {
           synonyms: entry.def[0].sseq[0][0][1].syn_list[0].map(syn => syn.wd)
         };
       });
-      selectedWord.isFetched = true;
+      if (selectedWord.options.length > 0) {
+        selectedWord.fetched = true;
+      }
       console.log(`new external word has ${selectedWord.options.length} options`);
       return { ...state, words: [...state.words] };
 
@@ -63,13 +64,14 @@ export default function wordsReducer(state = {
           synonyms: JSON.parse(option.synonyms)
         };
       });
-      selectedWord.isFetched = true;
+      if (selectedWord.options.length > 0) {
+        selectedWord.fetched = true;
+      }
       console.log(`new api word has ${selectedWord.options.length} options`);
       return { ...state, words: [...state.words] };
 
     case 'END_FETCH_WORD':
       console.log('ending fetch, setting loading to false');
-      console.log(state)
       return { ...state, words: [...state.words], loading: false };
 
     case 'POSTED_WORD':
@@ -91,13 +93,13 @@ export default function wordsReducer(state = {
       return { ...state, words: [...state.words] };
 
     case 'ADD_EXAMPLE':
-      example = 'Experiment and swap until your heart is full'
+      example = 'experiment swap forge and learn'
       words = example.split(' ').map((text, index) => {
         return {
           id: cuidFn(),
           index: index,
           text: text,
-          isFetched: false,
+          fetched: false,
           posted: false,
           options: []
         };
