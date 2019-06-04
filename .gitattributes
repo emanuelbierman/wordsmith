@@ -1,0 +1,7 @@
+# Ignore the following directories:
+db/* linguist-vendored
+test/* linguist-vendored
+tmp/* linguist-vendored
+
+# Read the whole React file as Javascript, just in case
+client/* linguist-language=Javascript
