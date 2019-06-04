@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Title from './Title';
-import SearchBar from './SearchBar';
+import WordsInputContainer from '../containers/WordsInputContainer';
 import Directions from './Directions';
 import WordsContainer from '../containers/WordsContainer';
 import { Container } from 'reactstrap';
@@ -9,8 +8,7 @@ class Home extends Component {
   render() {
     return(
       <Container className="text-info">
-        <Title/>
-        <SearchBar/>
+        <WordsInputContainer/>
         <Directions/>
         <WordsContainer/>
       </Container>
