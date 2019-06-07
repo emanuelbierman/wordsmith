@@ -17,11 +17,8 @@ class CommentContainer extends Component {
     let comment = this.state.comment;
     let comments = this.state.comments;
     this.setState({
+      comment: '',
       comments: [...comments, comment]
-    }, () => {
-      this.setState({
-        comment: ''
-      })
     });
   }
 
