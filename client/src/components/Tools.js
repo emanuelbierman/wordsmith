@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
+import CommentContainer from '../containers/CommentContainer';
 
 class Tools extends Component {
   render() {
     return(
+      <>
       <Container className="text-info">
         <h4>Parts of Speech Overview</h4>
         <hr/>
@@ -50,6 +52,9 @@ class Tools extends Component {
         <hr/>
         <p>Reference information provided by <a href="https://owl.purdue.edu/owl/general_writing/mechanics/parts_of_speech_overview.html">owl.purdue.edu</a></p>
       </Container>
+      <hr/>
+      <CommentContainer/>
+      </>
     )
   }
 }
