@@ -11,8 +11,6 @@ A single-page React/Redux web app with a Rails backend API that allows you to en
 
 [![Walkthrough](http://img.youtube.com/vi/YoFqGEAHjAs/0.jpg)](http://www.youtube.com/watch?v=YoFqGEAHjAs/0)
 
-![screenshot_1](public/images/screenshot_1.png)
-
 ![screenshot_2](public/images/screenshot_2.png)
 
 # Installation
