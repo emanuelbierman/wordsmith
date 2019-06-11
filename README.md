@@ -5,7 +5,7 @@
 
 A single-page React/Redux web app with a Rails backend API that allows you to enter a word and interact with its other possible meanings. Utilizes Thunk [middleware](https://redux.js.org/advanced/middleware) and [fetch()](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) to make asynchronous requests to the [Merriam-Webster Thesaurus API](https://dictionaryapi.com/).
 
-*The Rails API lives in /app. To explore the React app, visit the /client directory*
+*The Rails API lives in [/app](https://github.com/emanuelbierman/wordsmith/tree/master/app). To explore the React app, visit the [/client](https://github.com/emanuelbierman/wordsmith/tree/master/client) directory*
 
 # Demo
 
